@@ -5,10 +5,10 @@
 
 window.BIRTHDAY_CONFIG = {
   // 1. Basic Information
-  girlfriendName: "My Love",        // Replace with her real name or nickname (e.g. "Sophia", "Babe", "Princess")
-  yourName: "Yours Forever",       // Your name or how you sign off (e.g. "Alex", "Your Boy")
-  birthdayDate: "2026-09-10",      // YYYY-MM-DD format (used for countdown or celebration)
-  nickname: "Cutie Pie",           // A sweet nickname
+  girlfriendName: "Komal",         // Personalized for Komal ❤️
+  yourName: "Mayur",              // Your name
+  birthdayDate: "2026-09-10",      // YYYY-MM-DD format
+  nickname: "Komu 💕",             // Sweet nickname
   tagline: "Every second with you is a gift I will treasure forever. ✨",
 
   // 2. Music Player Settings
@@ -24,7 +24,7 @@ window.BIRTHDAY_CONFIG = {
   // 3. Opening Envelope / Welcome Screen
   envelope: {
     sealText: "Open Me 💕",
-    heading: "A Special Delivery For You",
+    heading: "A Special Delivery For Komal",
     subheading: "Made with all my heart, exclusively for your special day."
   },
 
@@ -115,22 +115,22 @@ window.BIRTHDAY_CONFIG = {
 
   // 6. Heartfelt Love Letter
   loveLetter: {
-    salutation: "To My Dearest Love,",
+    salutation: "To My Dearest Komal,",
     paragraphs: [
-      "Happy Birthday, my beautiful soul. Today is a celebration of the wonderful, radiant human being you are, and I want to remind you just how deeply you are loved.",
+      "Happy Birthday, my beautiful Komal. Today is a celebration of the wonderful, radiant human being you are, and I want to remind you just how deeply you are loved.",
       "From the first day we connected, you brought warmth, laughter, and an effortless peace into my life that I never knew I was missing. You make the ordinary moments feel extraordinary, whether we're dressed up for a fancy date or just lying on the couch doing absolutely nothing.",
       "I admire your strength, your gentle heart, and the beauty that radiates from you both inside and out. Thank you for choosing me, for believing in us, and for giving me your love.",
       "On this birthday, I wish for all your hopes and wildest dreams to unfold. May your year ahead be packed with endless laughter, exciting adventures, delicious treats, and zero worries. No matter what comes next, I promise to always stand by your side, cheering you on and loving you through every chapter."
     ],
     closing: "With all my love and devotion,",
-    signature: "Always Yours ❤️"
+    signature: "Forever Yours, Mayur ❤️"
   },
 
   // 7. Interactive Birthday Cake
   cake: {
     candlesCount: 3,
     initialMessage: "Make a wish and click or tap the candles to blow them out! 🎂",
-    blownMessage: "✨ Yay! May all your birthday wishes come true! I love you so much! 🎉💖"
+    blownMessage: "✨ Yay! May all your birthday wishes come true, Komal! I love you so much! 🎉💖"
   },
 
   // 8. Secret Birthday Coupons / Surprise Gifts
