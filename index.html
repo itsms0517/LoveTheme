@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, My Love! ✨</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rose: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              200: '#fecdd3',
+              300: '#fda4af',
+              400: '#fb7185',
+              500: '#f43f5e',
+              600: '#e11d48',
+              700: '#be123c',
+              800: '#9f1239',
+              900: '#881337',
+              950: '#4c0519',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="relative">
+
+  <!-- Background Floating Sparkles & Hearts Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Ambient Blurred Glow Orbs -->
+  <div class="bokeh-orb bg-rose-300 w-96 h-96 -top-20 -left-20"></div>
+  <div class="bokeh-orb bg-pink-200 w-80 h-80 top-1/3 -right-20" style="animation-delay: -3s;"></div>
+  <div class="bokeh-orb bg-amber-100 w-96 h-96 bottom-10 left-10" style="animation-delay: -6s;"></div>
+
+  <!-- =======================================================================
+       1. ENVELOPE WELCOME SCREEN (Opens on Click)
+       ======================================================================= -->
+  <div id="envelope-screen">
+    <div class="text-center mb-10 px-4">
+      <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-rose-200/70 text-rose-800 tracking-wider uppercase mb-3 backdrop-blur shadow-sm">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Special Delivery
+      </span>
+      <h1 id="envelope-heading" class="font-serif-romantic text-3xl sm:text-4xl md:text-5xl font-bold text-rose-950 mb-2">
+        A Special Delivery For You
+      </h1>
+      <p id="envelope-subheading" class="text-sm sm:text-base text-rose-800 max-w-md mx-auto">
+        Made with all my heart, exclusively for your special day.
+      </p>
+    </div>
+
+    <div id="envelope-wrapper" class="envelope-wrapper">
+      <div class="envelope-flap"></div>
+      <div class="letter-peek">
+        <span class="text-2xl mb-1">💌</span>
+        <h3 class="font-serif-romantic font-bold text-rose-900 text-sm sm:text-base">For Someone Irreplaceable</h3>
+        <p class="text-xs text-rose-600 mt-1 font-script text-base">Happy Birthday, my favorite person.</p>
+      </div>
+      <div class="envelope-pocket"></div>
+      <div id="wax-seal" class="wax-seal">
+        <span id="wax-seal-text">Open Me 💕</span>
+      </div>
+    </div>
+
+    <p class="mt-8 text-xs text-rose-700 tracking-wide flex items-center gap-1.5 animate-pulse">
+      <i data-lucide="heart" class="w-3.5 h-3.5 fill-rose-500 text-rose-500"></i>
+      Click the wax seal to unwrap your gift
+    </p>
+  </div>
+
+  <!-- =======================================================================
+       2. FLOATING MUSIC PLAYER WIDGET
+       ======================================================================= -->
+  <div id="music-widget" title="Click to play or pause music">
+    <div id="vinyl-disc" class="vinyl-disc">
+      <div class="vinyl-center"></div>
+    </div>
+    <div class="music-info flex flex-col pr-1">
+      <div class="flex items-center gap-2">
+        <span id="music-track-title" class="text-xs font-bold text-rose-950 max-w-[130px] truncate">Romantic Melody</span>
+        <div class="sound-waves">
+          <span class="sound-wave"></span>
+          <span class="sound-wave"></span>
+          <span class="sound-wave"></span>
+        </div>
+      </div>
+      <span id="music-track-artist" class="text-[10px] text-rose-600">For You ❤️</span>
+    </div>
+    <button id="music-play-btn" class="w-7 h-7 rounded-full bg-rose-100 flex items-center justify-center transition-colors">
+      <i data-lucide="play" class="w-3.5 h-3.5 text-rose-600"></i>
+    </button>
+  </div>
+
+  <!-- =======================================================================
+       3. MAIN WEBSITE CONTENT
+       ======================================================================= -->
+  <main class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-20 flex flex-col gap-24 md:gap-32">
+
+    <!-- HERO SECTION -->
+    <header class="text-center pt-8 md:pt-12">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/70 backdrop-blur border border-rose-200 shadow-sm text-xs md:text-sm font-semibold text-rose-600 mb-6 animate-bounce">
+        <i data-lucide="sparkles" class="w-4 h-4"></i> Today is all about you
+      </div>
+
+      <h1 class="font-serif-romantic text-4xl sm:text-6xl md:text-7xl font-bold text-rose-950 leading-tight">
+        Happy Birthday,<br>
+        <span class="text-rose-600 font-calligraphy text-5xl sm:text-7xl md:text-8xl font-normal girlfriend-name block mt-2">
+          My Love
+        </span>
+      </h1>
+
+      <p id="hero-tagline" class="mt-6 text-base sm:text-lg md:text-xl text-rose-900/80 max-w-xl mx-auto font-light leading-relaxed">
+        Every second with you is a gift I will treasure forever. ✨
+      </p>
+
+      <!-- Live Birthday Countdown / Celebration Banner -->
+      <div id="countdown-section" class="mt-10">
+        <!-- Rendered dynamically by main.js -->
+      </div>
+    </header>
+
+    <!-- INTERACTIVE BIRTHDAY CAKE -->
+    <section class="text-center">
+      <div class="max-w-xl mx-auto bg-white/60 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-card border border-rose-100 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-rose-100 rounded-full blur-2xl -z-10"></div>
+        <div class="absolute bottom-0 left-0 w-32 h-32 bg-pink-100 rounded-full blur-2xl -z-10"></div>
+
+        <span class="text-xs font-bold uppercase tracking-widest text-rose-400">Interactive Birthday Cake</span>
+        <h2 class="font-serif-romantic text-2xl md:text-3xl font-bold text-rose-950 mt-1 mb-6">
+          Make a Wish & Blow the Candles
+        </h2>
+
+        <!-- The Cake -->
+        <div id="interactive-cake" class="cake-container">
+          <div id="candles-row" class="candles-row">
+            <!-- Candles populated by cake.js -->
+          </div>
+          <div class="cake-tier tier-top"><div class="icing-drip"></div></div>
+          <div class="cake-tier tier-middle"><div class="icing-drip"></div></div>
+          <div class="cake-tier tier-bottom"><div class="icing-drip"></div></div>
+          <div class="cake-plate"></div>
+        </div>
+
+        <!-- Status / Message below cake -->
+        <div id="cake-status-message" class="mt-10 min-h-[48px] flex items-center justify-center">
+          <span class="text-rose-800 text-sm md:text-base font-medium">
+            Make a wish and click or tap the candles to blow them out! 🎂
+          </span>
+        </div>
+
+        <button id="cake-relight-btn" class="hidden mt-4 inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-semibold bg-rose-500 hover:bg-rose-600 text-white shadow-sm transition-all transform hover:scale-105">
+          <i data-lucide="flame" class="w-3.5 h-3.5"></i> Relight the Candles
+        </button>
+      </div>
+    </section>
+
+    <!-- MEMORY TIMELINE / POLAROID SCRAPBOOK -->
+    <section>
+      <div class="text-center mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-rose-500">Our Favorite Moments</span>
+        <h2 class="font-serif-romantic text-3xl md:text-4xl font-bold text-rose-950 mt-1">
+          Scrapbook of Memories
+        </h2>
+        <p class="text-sm md:text-base text-rose-800/80 mt-2">
+          Click any polaroid to take a closer trip down memory lane 💕
+        </p>
+      </div>
+
+      <div id="memories-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 pt-4">
+        <!-- Rendered dynamically from config.js -->
+      </div>
+    </section>
+
+    <!-- REASONS WHY I LOVE YOU (INTERACTIVE FLIP CARDS) -->
+    <section>
+      <div class="text-center mb-10">
+        <span class="text-xs font-bold uppercase tracking-widest text-rose-500">Little Things That Mean Everything</span>
+        <h2 class="font-serif-romantic text-3xl md:text-4xl font-bold text-rose-950 mt-1">
+          Reasons Why I Love You
+        </h2>
+        <p id="reasons-counter" class="text-xs sm:text-sm font-medium text-rose-600 mt-2">
+          Tap on each card to reveal what makes you so special ✨
+        </p>
+      </div>
+
+      <div id="reasons-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Rendered dynamically from config.js -->
+      </div>
+    </section>
+
+    <!-- HEARTFELT LOVE LETTER -->
+    <section>
+      <div class="text-center mb-10">
+        <span class="text-xs font-bold uppercase tracking-widest text-rose-500">From My Heart To Yours</span>
+        <h2 class="font-serif-romantic text-3xl md:text-4xl font-bold text-rose-950 mt-1">
+          A Letter For You
+        </h2>
+      </div>
+
+      <div class="max-w-2xl mx-auto parchment-paper rounded-2xl p-8 sm:p-12 md:p-16">
+        <div id="love-letter-content">
+          <!-- Rendered dynamically from config.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- BIRTHDAY SURPRISE COUPONS -->
+    <section>
+      <div class="text-center mb-10">
+        <span class="text-xs font-bold uppercase tracking-widest text-rose-500">Special Birthday Perks</span>
+        <h2 class="font-serif-romantic text-3xl md:text-4xl font-bold text-rose-950 mt-1">
+          Birthday Coupons For You
+        </h2>
+        <p class="text-xs sm:text-sm text-rose-800/80 mt-2">
+          These coupons never expire. Tap any coupon to redeem! 🎁
+        </p>
+      </div>
+
+      <div id="coupons-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Rendered dynamically from config.js -->
+      </div>
+    </section>
+
+    <!-- FOOTER SIGN-OFF -->
+    <footer class="text-center pt-12 pb-6 border-t border-rose-200/60">
+      <div class="text-2xl mb-3">💖</div>
+      <h3 class="font-serif-romantic text-2xl font-bold text-rose-950">
+        Happy Birthday, <span class="girlfriend-name text-rose-600">My Love</span>!
+      </h3>
+      <p class="text-sm text-rose-800/70 mt-2 font-handwriting text-xl">
+        Here's to a lifetime of celebrating your beautiful smile.
+      </p>
+      <p class="text-xs text-rose-400 mt-6 tracking-wider uppercase">
+        Designed with boundless love by <span class="your-name font-semibold text-rose-600">Yours Forever</span>
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- =======================================================================
+       PHOTO LIGHTBOX MODAL
+       ======================================================================= -->
+  <div id="photo-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-xl w-full p-4 sm:p-6 shadow-2xl relative animate-fadeIn">
+      <button onclick="closePhotoModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-700 transition-colors z-10">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div class="rounded-xl overflow-hidden bg-gray-50 mb-4 max-h-[60vh] flex items-center justify-center">
+        <img id="modal-img" src="" alt="Memory Photo" class="w-full h-full object-contain" />
+      </div>
+      <div class="text-center px-2">
+        <span id="modal-date" class="text-xs font-bold text-rose-500 uppercase tracking-wider"></span>
+        <h3 id="modal-title" class="font-serif-romantic text-xl font-bold text-gray-900 mt-1"></h3>
+        <p id="modal-caption" class="text-sm text-gray-600 mt-2 font-handwriting text-lg leading-relaxed"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Configuration & Scripts -->
+  <script src="config.js"></script>
+  <script src="js/confetti.js"></script>
+  <script src="js/music.js"></script>
+  <script src="js/cake.js"></script>
+  <script src="js/envelope.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
