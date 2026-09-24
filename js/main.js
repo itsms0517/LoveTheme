@@ -50,12 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 6. Render Birthday Coupons
   renderCoupons(config.coupons || []);
 
-  // 7. Initialize Lucide Icons
-  if (window.lucide) {
-    window.lucide.createIcons();
-  }
-
-  // 8. Close Modal on Escape Key
+  // 7. Close Modal on Escape Key
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') window.closePhotoModal();
   });
@@ -212,7 +207,7 @@ function renderLoveReasons(reasons) {
           </div>
           <h4 class="font-serif-romantic font-semibold text-rose-900 text-sm sm:text-base leading-snug">${reason.title}</h4>
           <span class="mt-2.5 sm:mt-3 text-[11px] sm:text-xs text-rose-400 font-medium flex items-center gap-1">
-            Tap to reveal <i data-lucide="sparkles" class="w-3 h-3"></i>
+            Tap to reveal <svg class="w-3 h-3 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
           </span>
         </div>
         <!-- Back -->

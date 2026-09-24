@@ -1,5 +1,5 @@
 // =======================================================================
-//  ENVELOPE WELCOME SCREEN & LIGHTNING-FAST TRANSITION
+//  ENVELOPE WELCOME SCREEN & INSTANT ZERO-LAG REVEAL
 // =======================================================================
 
 (function () {
@@ -15,36 +15,40 @@
     if (isOpening) return;
     isOpening = true;
 
-    // 1. Immediately disable pointer events so there is zero interaction delay
+    // 1. Immediately disable pointer events to prevent duplicate clicks
     envelopeScreen.style.pointerEvents = 'none';
 
-    // 2. Play flap opening animation
+    // 2. Animate flap open
     envelopeWrapper.classList.add('open');
 
-    // 3. Start music in background without blocking rendering
-    setTimeout(() => {
+    // 3. Start romantic melody immediately
+    try {
       if (window.playRomanticMusic) {
         window.playRomanticMusic();
       }
-    }, 40);
-
-    // 4. Initial celebration confetti
-    if (window.triggerConfettiExplosion) {
-      window.triggerConfettiExplosion();
+    } catch (e) {
+      console.warn("Audio play error:", e);
     }
 
-    // 5. Fast, smooth fade-out to main website (350ms instead of 850ms)
+    // 4. Single gentle celebration burst
+    try {
+      if (window.triggerConfettiExplosion) {
+        window.triggerConfettiExplosion();
+      }
+    } catch (e) {}
+
+    // 5. Reveal main website smoothly in 280ms
     setTimeout(() => {
       envelopeScreen.classList.add('opened');
 
-      // Hide completely and fire welcoming celebration
+      // Fully remove from DOM after fade-out transition
       setTimeout(() => {
         envelopeScreen.style.display = 'none';
-        if (window.triggerConfettiExplosion) {
-          window.triggerConfettiExplosion();
+        if (envelopeScreen.parentNode) {
+          envelopeScreen.parentNode.removeChild(envelopeScreen);
         }
-      }, 350);
-    }, 380);
+      }, 300);
+    }, 280);
   }
 
   if (waxSeal) {

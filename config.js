@@ -15,9 +15,8 @@ window.BIRTHDAY_CONFIG = {
   music: {
     title: "Can't Help Falling in Love",
     artist: "Romantic Acoustic",
-    // You can paste a direct MP3 link or path to a local audio file here (e.g., "music/song.mp3").
-    // If left empty or on error, the website automatically plays a soothing built-in romantic melody!
-    audioUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-piano-112199.mp3",
+    // Built-in romantic acoustic melody plays instantly with zero network delay!
+    audioUrl: "",
     autoPlayPrompt: true           // Gentle prompt to start music on first interaction
   },
 
