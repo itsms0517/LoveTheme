@@ -11,37 +11,27 @@
   <title>Happy Birthday, Komal! ✨💖</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            rose: {
-              50: '#fff1f2',
-              100: '#ffe4e6',
-              200: '#fecdd3',
-              300: '#fda4af',
-              400: '#fb7185',
-              500: '#f43f5e',
-              600: '#e11d48',
-              700: '#be123c',
-              800: '#9f1239',
-              900: '#881337',
-              950: '#4c0519',
-            }
-          }
-        }
-      }
+  <!-- Immediate In-Head Background Style: Guarantees ZERO White Screen on Load -->
+  <style>
+    html, body {
+      background-color: #fff1f2 !important;
+      background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 50%, #fce7f3 100%) !important;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
     }
-  </script>
+    #envelope-screen {
+      background-color: #fff1f2 !important;
+      background: radial-gradient(circle at center, #fff1f2 0%, #fda4af 100%) !important;
+    }
+  </style>
 
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <!-- Canvas Confetti -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <!-- Preconnect to Google Fonts for Instant Typographic Rendering -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Caveat:wght@600;700&display=swap">
 
   <!-- Preload Memory Photos for Instant Zero-Lag Display -->
   <link rel="preload" as="image" href="images/Image-1.jpeg">
@@ -51,7 +41,7 @@
   <link rel="preload" as="image" href="images/Image-5.jpeg">
   <link rel="preload" as="image" href="images/Image-6.jpeg">
 
-  <!-- Custom Stylesheet -->
+  <!-- Standalone High-Speed Stylesheet -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="relative">
@@ -65,7 +55,7 @@
   <div class="bokeh-orb bg-amber-100 w-64 h-64 sm:w-96 sm:h-96 bottom-10 left-5 sm:left-10" style="animation-delay: -6s;"></div>
 
   <!-- =======================================================================
-       1. ENVELOPE WELCOME SCREEN (Mobile-Responsive & Smooth)
+       1. ENVELOPE WELCOME SCREEN (Opens instantly without lag)
        ======================================================================= -->
   <div id="envelope-screen">
     <div class="text-center mb-6 sm:mb-10 px-4">
@@ -100,7 +90,7 @@
   </div>
 
   <!-- =======================================================================
-       2. FLOATING MUSIC PLAYER WIDGET (Compact for Phones)
+       2. FLOATING MUSIC PLAYER WIDGET
        ======================================================================= -->
   <div id="music-widget" title="Tap to play or pause music">
     <div id="vinyl-disc" class="vinyl-disc">
@@ -123,7 +113,7 @@
   </div>
 
   <!-- =======================================================================
-       3. MAIN WEBSITE CONTENT (Fluid & Touch-Friendly)
+       3. MAIN WEBSITE CONTENT
        ======================================================================= -->
   <main class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-10 md:py-20 flex flex-col gap-16 sm:gap-24 md:gap-32">
 
@@ -269,7 +259,7 @@
   </main>
 
   <!-- =======================================================================
-       PHOTO LIGHTBOX MODAL (Touch-friendly & Tap-outside to close)
+       PHOTO LIGHTBOX MODAL
        ======================================================================= -->
   <div id="photo-modal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-[100] hidden items-center justify-center p-3 sm:p-4" onclick="if(event.target === this) closePhotoModal()">
     <div class="bg-white rounded-2xl max-w-xl w-[92vw] sm:w-full p-4 sm:p-6 shadow-2xl relative max-h-[88dvh] overflow-y-auto">
@@ -287,12 +277,16 @@
     </div>
   </div>
 
-  <!-- Configuration & Scripts -->
-  <script src="config.js"></script>
-  <script src="js/confetti.js"></script>
-  <script src="js/music.js"></script>
-  <script src="js/cake.js"></script>
-  <script src="js/envelope.js"></script>
-  <script src="js/main.js"></script>
+  <!-- Deferred Scripts: Non-blocking for Instant Page Paint -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
+
+  <!-- Application Logic -->
+  <script src="config.js" defer></script>
+  <script src="js/confetti.js" defer></script>
+  <script src="js/music.js" defer></script>
+  <script src="js/cake.js" defer></script>
+  <script src="js/envelope.js" defer></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>
