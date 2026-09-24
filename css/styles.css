@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ROMANTIC BIRTHDAY WEBSITE - CUSTOM STYLES
+   ROMANTIC BIRTHDAY WEBSITE - CUSTOM STYLES (MOBILE-FIRST & RESPONSIVE)
    ========================================================================== */
 
 /* --- Fonts & Base Setup --- */
@@ -17,19 +17,28 @@
   --shadow-card: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg-gradient);
   color: #4a1525;
-  overflow-x: hidden;
-  position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   selection-background-color: #f43f5e;
   selection-color: #ffffff;
 }
@@ -51,6 +60,16 @@ body {
   font-family: 'Caveat', cursive;
 }
 
+/* Touch & tap enhancements */
+button, a, input, [role="button"], .polaroid-card, .flip-card, .wax-seal, .coupon-card, #music-widget {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active, .wax-seal:active, #music-widget:active {
+  transform: scale(0.96);
+}
+
 /* --- Floating Background Canvas & Bokeh --- */
 #bg-canvas {
   position: fixed;
@@ -58,6 +77,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   pointer-events: none;
   z-index: 1;
 }
@@ -77,33 +97,39 @@ body {
   100% { transform: translateY(20px) scale(0.95); }
 }
 
-/* --- Envelope Intro Screen --- */
+/* --- Envelope Intro Screen (Mobile-Optimized) --- */
 #envelope-screen {
   position: fixed;
   inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
   background: radial-gradient(circle at center, #fff1f2 0%, #fda4af 100%);
   z-index: 1000;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: env(safe-area-inset-top, 16px) 16px env(safe-area-inset-bottom, 16px) 16px;
+  overflow: hidden;
   transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 #envelope-screen.opened {
   opacity: 0;
-  transform: scale(1.15);
+  transform: scale(1.12);
   pointer-events: none;
 }
 
 .envelope-wrapper {
   position: relative;
-  width: 320px;
-  height: 220px;
+  width: min(340px, 86vw);
+  height: min(230px, 58vw);
   background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 25px 50px -12px rgba(225, 29, 72, 0.35);
+  box-shadow: 0 20px 45px -10px rgba(225, 29, 72, 0.35);
   cursor: pointer;
+  user-select: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -115,8 +141,8 @@ body {
 }
 
 .envelope-wrapper:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 30px 60px -15px rgba(225, 29, 72, 0.45);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(225, 29, 72, 0.45);
 }
 
 .envelope-pocket {
@@ -143,26 +169,19 @@ body {
   opacity: 0.5;
 }
 
+/* 100% Responsive Envelope Flap using CSS Clip-Path (Scales perfectly on all screens) */
 .envelope-flap {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 0;
-  border-left: 160px solid transparent;
-  border-right: 160px solid transparent;
-  border-top: 130px solid #f43f5e;
+  height: 56%;
+  background: linear-gradient(180deg, #f43f5e 0%, #e11d48 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 3;
-}
-
-@media (min-width: 640px) {
-  .envelope-flap {
-    border-left-width: 210px;
-    border-right-width: 210px;
-    border-top-width: 160px;
-  }
+  filter: drop-shadow(0 4px 6px rgba(159, 18, 57, 0.25));
 }
 
 .envelope-wrapper.open .envelope-flap {
@@ -172,11 +191,11 @@ body {
 
 .wax-seal {
   position: absolute;
-  top: 95px;
+  top: 48%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 72px;
-  height: 72px;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
   background: radial-gradient(circle, #e11d48, #9f1239);
   border-radius: 50%;
   box-shadow: 0 4px 15px rgba(159, 18, 57, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.3);
@@ -185,16 +204,23 @@ body {
   justify-content: center;
   color: #fff;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   z-index: 4;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
   animation: pulseSeal 2s infinite ease-in-out;
 }
 
+@media (min-width: 640px) {
+  .wax-seal {
+    width: 76px;
+    height: 76px;
+    font-size: 0.9rem;
+  }
+}
+
 @keyframes pulseSeal {
-  0%, 100% { transform: translateX(-50%) scale(1); }
-  50% { transform: translateX(-50%) scale(1.08); }
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.08); }
 }
 
 .letter-peek {
@@ -212,42 +238,58 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 0.75rem;
   text-align: center;
   transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .envelope-wrapper.open .letter-peek {
-  transform: translateY(-80px);
+  transform: translateY(-60px);
 }
 
-/* --- Floating Music Widget --- */
+@media (min-width: 640px) {
+  .envelope-wrapper.open .letter-peek {
+    transform: translateY(-80px);
+  }
+}
+
+/* --- Floating Music Widget (Compact & Touch-Friendly) --- */
 #music-widget {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  right: 16px;
   z-index: 90;
   display: flex;
   align-items: center;
-  gap: 12px;
-  background: rgba(255, 255, 255, 0.9);
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(254, 205, 211, 0.8);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(254, 205, 211, 0.85);
   border-radius: 9999px;
-  padding: 6px 16px 6px 6px;
-  box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.25);
+  padding: 5px;
+  box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.28);
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  #music-widget {
+    bottom: 24px;
+    right: 24px;
+    padding: 6px 14px 6px 6px;
+    gap: 12px;
+  }
 }
 
 #music-widget:hover {
-  transform: translateY(-2px) scale(1.03);
+  transform: translateY(-2px) scale(1.02);
   box-shadow: 0 15px 30px -5px rgba(244, 63, 94, 0.35);
 }
 
 .vinyl-disc {
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: radial-gradient(circle, #f43f5e 20%, #1f2937 21%, #111827 80%, #374151 100%);
   border: 2px solid #fff;
@@ -256,11 +298,19 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .vinyl-disc {
+    width: 44px;
+    height: 44px;
+  }
 }
 
 .vinyl-center {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   background: #f43f5e;
   border-radius: 50%;
   border: 2px solid #fff;
@@ -279,11 +329,11 @@ body {
   display: flex;
   align-items: flex-end;
   gap: 3px;
-  height: 16px;
+  height: 14px;
 }
 
 .sound-wave {
-  width: 3px;
+  width: 2.5px;
   height: 100%;
   background: #f43f5e;
   border-radius: 2px;
@@ -299,11 +349,11 @@ body {
   100% { transform: scaleY(1); }
 }
 
-/* --- Interactive Birthday Cake --- */
+/* --- Interactive Birthday Cake (Fully Fluid & Touch-Responsive) --- */
 .cake-container {
   position: relative;
-  width: 280px;
-  height: 240px;
+  width: min(280px, 82vw);
+  height: min(240px, 70vw);
   margin: 0 auto;
   cursor: pointer;
   user-select: none;
@@ -319,22 +369,22 @@ body {
 
 .tier-bottom {
   bottom: 0;
-  width: 250px;
-  height: 80px;
+  width: 90%;
+  height: 33%;
   background: linear-gradient(180deg, #fbcfe8 0%, #f472b6 100%);
 }
 
 .tier-middle {
-  bottom: 75px;
-  width: 190px;
-  height: 65px;
+  bottom: 31%;
+  width: 68%;
+  height: 27%;
   background: linear-gradient(180deg, #ffe4e6 0%, #fb7185 100%);
 }
 
 .tier-top {
-  bottom: 135px;
-  width: 130px;
-  height: 55px;
+  bottom: 56%;
+  width: 46%;
+  height: 23%;
   background: linear-gradient(180deg, #fff1f2 0%, #fda4af 100%);
 }
 
@@ -343,7 +393,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 18px;
+  height: 16px;
   background: #ffffff;
   border-radius: 0 0 10px 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
@@ -352,7 +402,7 @@ body {
 .icing-drip::after {
   content: '';
   position: absolute;
-  top: 14px;
+  top: 12px;
   left: 0;
   width: 100%;
   height: 8px;
@@ -362,34 +412,41 @@ body {
 
 .cake-plate {
   position: absolute;
-  bottom: -15px;
+  bottom: -6%;
   left: 50%;
   transform: translateX(-50%);
-  width: 300px;
-  height: 24px;
+  width: 106%;
+  height: 10%;
   background: linear-gradient(90deg, #e5e7eb, #ffffff, #d1d5db);
   border-radius: 50%;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
 }
 
 /* Candles & Flame Animation */
 .candles-row {
   position: absolute;
-  bottom: 185px;
+  bottom: 77%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 20px;
+  gap: 16px;
   z-index: 10;
 }
 
 .candle {
   position: relative;
-  width: 12px;
-  height: 48px;
+  width: 10px;
+  height: 42px;
   background: repeating-linear-gradient(45deg, #ffffff, #ffffff 6px, #f43f5e 6px, #f43f5e 12px);
   border-radius: 4px 4px 2px 2px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 640px) {
+  .candle {
+    width: 12px;
+    height: 48px;
+  }
 }
 
 .candle-wick {
@@ -447,26 +504,35 @@ body {
   100% { opacity: 0; transform: translateX(-60%) translateY(-35px) scale(2); }
 }
 
-/* --- Polaroid Scrapbook Cards --- */
+/* --- Polaroid Scrapbook Cards (Mobile-Friendly) --- */
 .polaroid-card {
   background: #ffffff;
-  padding: 14px 14px 28px 14px;
-  border-radius: 4px;
-  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.03);
+  padding: 12px 12px 20px 12px;
+  border-radius: 6px;
+  box-shadow: 0 12px 24px -5px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.03);
   position: relative;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
+  user-select: none;
+}
+
+@media (min-width: 640px) {
+  .polaroid-card {
+    padding: 14px 14px 28px 14px;
+    border-radius: 4px;
+    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.03);
+  }
 }
 
 .polaroid-card::before {
   content: '';
   position: absolute;
-  top: -12px;
+  top: -10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 90px;
-  height: 26px;
-  background: rgba(254, 205, 211, 0.65);
+  width: 80px;
+  height: 22px;
+  background: rgba(254, 205, 211, 0.75);
   backdrop-filter: blur(2px);
   border-left: 2px dashed rgba(244, 63, 94, 0.4);
   border-right: 2px dashed rgba(244, 63, 94, 0.4);
@@ -474,34 +540,60 @@ body {
   z-index: 5;
 }
 
+@media (min-width: 640px) {
+  .polaroid-card::before {
+    top: -12px;
+    width: 90px;
+    height: 26px;
+  }
+}
+
 .polaroid-card:hover {
-  transform: translateY(-8px) scale(1.04) rotate(0deg) !important;
-  box-shadow: 0 25px 40px -10px rgba(244, 63, 94, 0.28);
+  transform: translateY(-6px) scale(1.02) !important;
+  box-shadow: 0 20px 35px -8px rgba(244, 63, 94, 0.25);
   z-index: 20;
+}
+
+.polaroid-card:active {
+  transform: scale(0.98) !important;
 }
 
 .polaroid-img-wrapper {
   overflow: hidden;
-  border-radius: 2px;
+  border-radius: 4px;
   position: relative;
+  background: #fdf2f4;
 }
 
 .polaroid-img-wrapper img {
   width: 100%;
-  height: 260px;
+  height: 220px;
   object-fit: cover;
-  transition: transform 0.6s ease;
+  transition: transform 0.5s ease;
+}
+
+@media (min-width: 640px) {
+  .polaroid-img-wrapper img {
+    height: 260px;
+  }
 }
 
 .polaroid-card:hover .polaroid-img-wrapper img {
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
-/* --- Reasons Flip Cards --- */
+/* --- Reasons Flip Cards (Mobile-Enhanced) --- */
 .flip-card {
   perspective: 1000px;
-  height: 220px;
+  height: 210px;
   cursor: pointer;
+  user-select: none;
+}
+
+@media (min-width: 640px) {
+  .flip-card {
+    height: 220px;
+  }
 }
 
 .flip-card-inner {
@@ -509,7 +601,7 @@ body {
   width: 100%;
   height: 100%;
   text-align: center;
-  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
   transform-style: preserve-3d;
 }
 
@@ -529,9 +621,16 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1.5rem;
+  padding: 1.25rem 1rem;
   box-shadow: var(--shadow-card);
   border: 1px solid rgba(254, 205, 211, 0.6);
+}
+
+@media (min-width: 640px) {
+  .flip-card-front,
+  .flip-card-back {
+    padding: 1.5rem;
+  }
 }
 
 .flip-card-front {
@@ -549,31 +648,38 @@ body {
   background-image: radial-gradient(#fecdd3 0.75px, transparent 0.75px);
   background-size: 20px 20px;
   border: 1px solid #fed7aa;
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08), inset 0 0 60px rgba(254, 215, 170, 0.2);
+  box-shadow: 0 15px 35px -8px rgba(0, 0, 0, 0.08), inset 0 0 50px rgba(254, 215, 170, 0.2);
   position: relative;
 }
 
 .parchment-paper::before {
   content: '';
   position: absolute;
-  inset: 12px;
+  inset: 8px;
   border: 1px dashed rgba(244, 63, 94, 0.25);
   pointer-events: none;
 }
 
-/* --- Birthday Coupon Scratch Cards --- */
+@media (min-width: 640px) {
+  .parchment-paper::before {
+    inset: 12px;
+  }
+}
+
+/* --- Birthday Coupon Cards --- */
 .coupon-card {
   background: #ffffff;
   border: 2px dashed #f43f5e;
   border-radius: 16px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.12);
-  transition: transform 0.3s ease;
+  box-shadow: 0 8px 20px -5px rgba(244, 63, 94, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
 }
 
-.coupon-card:hover {
-  transform: translateY(-4px);
+.coupon-card:active {
+  transform: scale(0.97);
 }
 
 .coupon-card::before,
@@ -581,15 +687,15 @@ body {
   content: '';
   position: absolute;
   top: 50%;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   background: #fff1f2;
   border-radius: 50%;
   transform: translateY(-50%);
 }
 
-.coupon-card::before { left: -12px; }
-.coupon-card::after { right: -12px; }
+.coupon-card::before { left: -10px; }
+.coupon-card::after { right: -10px; }
 
 /* --- Smooth Scrolling --- */
 html {
@@ -598,7 +704,7 @@ html {
 
 /* --- Custom Scrollbar --- */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #fff1f2;

@@ -1,5 +1,5 @@
 // =======================================================================
-//  CELEBRATION PARTICLES & FLOATING HEARTS
+//  CELEBRATION PARTICLES & FLOATING HEARTS (MOBILE-OPTIMIZED)
 // =======================================================================
 
 (function () {
@@ -35,10 +35,10 @@
     reset() {
       this.x = Math.random() * width;
       this.y = height + 20;
-      this.size = Math.random() * 14 + 8;
-      this.speed = Math.random() * 0.8 + 0.3;
-      this.opacity = Math.random() * 0.5 + 0.2;
-      this.swing = Math.random() * 2 - 1;
+      this.size = Math.random() * 12 + 6;
+      this.speed = Math.random() * 0.7 + 0.3;
+      this.opacity = Math.random() * 0.45 + 0.2;
+      this.swing = Math.random() * 1.8 - 0.9;
       this.swingSpeed = Math.random() * 0.02 + 0.01;
       this.angle = 0;
       this.isHeart = Math.random() > 0.4;
@@ -80,8 +80,8 @@
     }
   }
 
-  // Initialize particles
-  const particleCount = window.innerWidth < 768 ? 25 : 45;
+  // Optimize particle count for mobile screens (saves battery & keeps 60fps)
+  const particleCount = window.innerWidth < 640 ? 18 : 38;
   for (let i = 0; i < particleCount; i++) {
     particles.push(new FloatingParticle());
   }
@@ -96,11 +96,19 @@
   }
   animate();
 
-  // 2. Click Anywhere to spawn micro floating hearts
-  window.addEventListener('click', (e) => {
-    if (e.target.closest('button, input, a')) return; // ignore clicks on actual buttons
+  // 2. Tap / Click Anywhere to spawn micro floating hearts
+  let lastTapTime = 0;
+  window.addEventListener('pointerdown', (e) => {
+    // Ignore interactive elements
+    if (e.target.closest('button, input, a, .coupon-card, .flip-card, .wax-seal, #interactive-cake, #music-widget')) return;
+    
+    // Throttle fast drags/taps to prevent clutter
+    const now = Date.now();
+    if (now - lastTapTime < 180) return;
+    lastTapTime = now;
+
     createFloatingHeartAt(e.clientX, e.clientY);
-  });
+  }, { passive: true });
 
   function createFloatingHeartAt(x, y) {
     const heart = document.createElement('div');
@@ -110,32 +118,36 @@
     heart.style.left = `${x}px`;
     heart.style.top = `${y}px`;
     heart.style.pointerEvents = 'none';
-    heart.style.fontSize = `${Math.random() * 14 + 18}px`;
+    heart.style.fontSize = `${Math.random() * 10 + 16}px`;
     heart.style.zIndex = '9999';
     heart.style.transform = 'translate(-50%, -50%) scale(0.5)';
-    heart.style.transition = 'all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1)';
+    heart.style.transition = 'all 0.85s cubic-bezier(0.2, 0.8, 0.2, 1)';
     document.body.appendChild(heart);
 
     requestAnimationFrame(() => {
-      const offsetX = (Math.random() - 0.5) * 60;
-      const offsetY = -80 - Math.random() * 50;
-      heart.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px)) scale(1.3)`;
+      const offsetX = (Math.random() - 0.5) * 50;
+      const offsetY = -60 - Math.random() * 40;
+      heart.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px)) scale(1.2)`;
       heart.style.opacity = '0';
     });
 
     setTimeout(() => {
       heart.remove();
-    }, 950);
+    }, 900);
   }
 
-  // 3. Global Fireworks / Confetti Explosion helper
+  // 3. Global Fireworks / Confetti Explosion helper (scaled for mobile performance)
   window.triggerConfettiExplosion = function () {
     if (typeof confetti !== 'function') return;
 
+    const isMobile = window.innerWidth < 640;
+    const centerCount = isMobile ? 50 : 80;
+    const cannonCount = isMobile ? 35 : 55;
+
     // Center burst
     confetti({
-      particleCount: 80,
-      spread: 90,
+      particleCount: centerCount,
+      spread: isMobile ? 70 : 90,
       origin: { y: 0.6 },
       colors: ['#f43f5e', '#fb7185', '#fda4af', '#f59e0b', '#fbbf24', '#ffffff']
     });
@@ -143,23 +155,23 @@
     // Left cannon
     setTimeout(() => {
       confetti({
-        particleCount: 50,
+        particleCount: cannonCount,
         angle: 60,
-        spread: 70,
+        spread: 60,
         origin: { x: 0, y: 0.7 },
         colors: ['#f43f5e', '#ec4899', '#fbcfe8']
       });
-    }, 200);
+    }, 180);
 
     // Right cannon
     setTimeout(() => {
       confetti({
-        particleCount: 50,
+        particleCount: cannonCount,
         angle: 120,
-        spread: 70,
+        spread: 60,
         origin: { x: 1, y: 0.7 },
         colors: ['#f43f5e', '#fb7185', '#fef08a']
       });
-    }, 400);
+    }, 360);
   };
 })();
