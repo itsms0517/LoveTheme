@@ -29,43 +29,42 @@ window.BIRTHDAY_CONFIG = {
   },
 
   // 4. Memory Scrapbook (Polaroid Gallery)
-  // You can replace the image URLs with links to your own photos, or local files like "images/photo1.jpg"
   memories: [
     {
       title: "Where It All Began",
       date: "The Day We Met",
-      caption: "The exact moment my life changed for the better. I still remember what you were wearing.",
-      image: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80"
+      caption: "It started somewhere in the middle of third year, when you were just a friend I never knew would become so important to me.",
+      image: "images/Image-1.jpeg"
     },
     {
-      title: "Under The Stars",
-      date: "Our Late Night Talks",
-      caption: "Talking for hours until 3 AM and never running out of things to laugh and dream about.",
-      image: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=800&q=80"
+      title: "We Got Closer",
+      date: "The Little Things",
+      caption: "More talks, more laughs, more time together. Without even realizing it, you became a part of my everyday life.",
+      image: "images/Image-2.jpeg"
     },
     {
-      title: "That Radiant Smile",
-      date: "My Favorite View",
-      caption: "Whenever you smile, everything else fades into the background. You make my world so bright.",
-      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80"
+      title: "Something Changed",
+      date: "More Than Friends",
+      caption: "Somewhere between all those conversations and little moments, my feelings for you started becoming something more.",
+      image: "images/Image-3.jpeg"
     },
     {
-      title: "Adventures With You",
-      date: "Exploring Hand in Hand",
-      caption: "It doesn't matter where we are—as long as I'm with you, anywhere feels like home.",
-      image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=800&q=80"
+      title: "And Then, Us",
+      date: "From Friends to Love",
+      caption: "One day we were just friends, and somehow we became the two people who didn't want to imagine life without each other.",
+      image: "images/Image-4.jpeg"
     },
     {
-      title: "Little Silly Moments",
-      date: "Pure Happiness",
-      caption: "The goofy inside jokes, spontaneous dancing in the kitchen, and belly laughs that hurt so good.",
-      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80"
+      title: "Our Crazy Moments",
+      date: "Everything In Between",
+      caption: "So many laughs, silly moments, random plans, little fights and memories that only make sense to us.",
+      image: "images/Image-5.jpeg"
     },
     {
-      title: "Forever & Always",
+      title: "Forever Feels Right",
       date: "Today & Every Tomorrow",
-      caption: "I fall more deeply in love with you with every sunrise. Happy Birthday, my whole world.",
-      image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800&q=80"
+      caption: "A friendship that turned into love, and a love story that keeps giving us new memories every day.",
+      image: "images/Image-6.jpeg"
     }
   ],
 
