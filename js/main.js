@@ -25,10 +25,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const waxSealText = document.getElementById('wax-seal-text');
   if (waxSealText && config.envelope?.sealText) waxSealText.textContent = config.envelope.sealText;
 
-  // 2. Birthday Countdown / Status
+  // 2. Preload all scrapbook photos immediately in background
+  if (config.memories && config.memories.length) {
+    config.memories.forEach(item => {
+      if (item.image) {
+        const preImg = new Image();
+        preImg.src = item.image;
+      }
+    });
+  }
+
+  // 3. Birthday Countdown / Status
   setupBirthdayCountdown(config.birthdayDate);
 
-  // 3. Render Polaroid Memory Scrapbook
+  // 4. Render Polaroid Memory Scrapbook
   renderMemories(config.memories || []);
 
   // 4. Render Reasons Why I Love You
@@ -136,7 +146,7 @@ function renderMemories(memories) {
 
     card.innerHTML = `
       <div class="polaroid-img-wrapper">
-        <img src="${item.image}" alt="${item.title}" loading="lazy" />
+        <img src="${item.image}" alt="${item.title}" decoding="async" fetchpriority="high" />
       </div>
       <div class="mt-3 sm:mt-4 text-center px-1">
         <p class="text-[10px] sm:text-xs font-semibold text-rose-500 uppercase tracking-wider">${item.date || ''}</p>

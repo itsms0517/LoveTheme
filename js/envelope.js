@@ -1,5 +1,5 @@
 // =======================================================================
-//  ENVELOPE WELCOME SCREEN & INTERACTION
+//  ENVELOPE WELCOME SCREEN & LIGHTNING-FAST TRANSITION
 // =======================================================================
 
 (function () {
@@ -15,29 +15,36 @@
     if (isOpening) return;
     isOpening = true;
 
-    // 1. Play seal break & start romantic music
-    envelopeWrapper.classList.add('open');
-    if (window.playRomanticMusic) {
-      window.playRomanticMusic();
-    }
+    // 1. Immediately disable pointer events so there is zero interaction delay
+    envelopeScreen.style.pointerEvents = 'none';
 
-    // 2. Initial mini confetti burst
+    // 2. Play flap opening animation
+    envelopeWrapper.classList.add('open');
+
+    // 3. Start music in background without blocking rendering
+    setTimeout(() => {
+      if (window.playRomanticMusic) {
+        window.playRomanticMusic();
+      }
+    }, 40);
+
+    // 4. Initial celebration confetti
     if (window.triggerConfettiExplosion) {
       window.triggerConfettiExplosion();
     }
 
-    // 3. Smooth transition to main website
+    // 5. Fast, smooth fade-out to main website (350ms instead of 850ms)
     setTimeout(() => {
       envelopeScreen.classList.add('opened');
-      
-      // Secondary big celebration burst
+
+      // Hide completely and fire welcoming celebration
       setTimeout(() => {
+        envelopeScreen.style.display = 'none';
         if (window.triggerConfettiExplosion) {
           window.triggerConfettiExplosion();
         }
-        envelopeScreen.style.display = 'none';
-      }, 700);
-    }, 850);
+      }, 350);
+    }, 380);
   }
 
   if (waxSeal) {
