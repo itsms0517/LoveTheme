@@ -3,7 +3,7 @@
 // =======================================================================
 
 (function () {
-  const config = window.BIRTHDAY_CONFIG?.music || {};
+  const config = (window.BIRTHDAY_CONFIG && window.BIRTHDAY_CONFIG.music) ? window.BIRTHDAY_CONFIG.music : {};
   const musicWidget = document.getElementById('music-widget');
   const vinylDisc = document.getElementById('vinyl-disc');
   const playBtn = document.getElementById('music-play-btn');
@@ -129,10 +129,10 @@
 
   function updateUI() {
     if (isPlaying) {
-      vinylDisc?.classList.add('spin');
+      if (vinylDisc) vinylDisc.classList.add('spin');
       if (playBtn) playBtn.innerHTML = '<svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-600" viewBox="0 0 24 24" fill="currentColor"><rect width="4" height="16" x="6" y="4"></rect><rect width="4" height="16" x="14" y="4"></rect></svg>';
     } else {
-      vinylDisc?.classList.remove('spin');
+      if (vinylDisc) vinylDisc.classList.remove('spin');
       if (playBtn) playBtn.innerHTML = '<svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-600" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>';
     }
   }

@@ -2,7 +2,7 @@
 //  MAIN APP LOGIC - DATA POPULATION & MOBILE-FRIENDLY INTERACTIONS
 // =======================================================================
 
-document.addEventListener('DOMContentLoaded', () => {
+function initBirthdayApp() {
   const config = window.BIRTHDAY_CONFIG || {};
 
   // 1. Populate Basic Names & Texts
@@ -17,28 +17,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Envelope texts
   const envelopeHeading = document.getElementById('envelope-heading');
-  if (envelopeHeading && config.envelope?.heading) envelopeHeading.textContent = config.envelope.heading;
-
-  const envelopeSubheading = document.getElementById('envelope-subheading');
-  if (envelopeSubheading && config.envelope?.subheading) envelopeSubheading.textContent = config.envelope.subheading;
-
-  const waxSealText = document.getElementById('wax-seal-text');
-  if (waxSealText && config.envelope?.sealText) waxSealText.textContent = config.envelope.sealText;
-
-  // 2. Preload all scrapbook photos immediately in background
-  if (config.memories && config.memories.length) {
-    config.memories.forEach(item => {
-      if (item.image) {
-        const preImg = new Image();
-        preImg.src = item.image;
-      }
-    });
+  if (envelopeHeading && config.envelope && config.envelope.heading) {
+    envelopeHeading.textContent = config.envelope.heading;
   }
 
-  // 3. Birthday Countdown / Status
+  const envelopeSubheading = document.getElementById('envelope-subheading');
+  if (envelopeSubheading && config.envelope && config.envelope.subheading) {
+    envelopeSubheading.textContent = config.envelope.subheading;
+  }
+
+  const waxSealText = document.getElementById('wax-seal-text');
+  if (waxSealText && config.envelope && config.envelope.sealText) {
+    waxSealText.textContent = config.envelope.sealText;
+  }
+
+  // 2. Birthday Countdown / Status
   setupBirthdayCountdown(config.birthdayDate);
 
-  // 4. Render Polaroid Memory Scrapbook
+  // 3. Render Polaroid Memory Scrapbook
   renderMemories(config.memories || []);
 
   // 4. Render Reasons Why I Love You
@@ -54,7 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') window.closePhotoModal();
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initBirthdayApp);
+} else {
+  initBirthdayApp();
+}
 
 // --- Countdown Logic (Mobile-Optimized Layout) ---
 function setupBirthdayCountdown(dateString) {
@@ -141,7 +143,7 @@ function renderMemories(memories) {
 
     card.innerHTML = `
       <div class="polaroid-img-wrapper">
-        <img src="${item.image}" alt="${item.title}" decoding="async" fetchpriority="high" />
+        <img src="${item.image}" alt="${item.title}" loading="lazy" decoding="async" />
       </div>
       <div class="mt-3 sm:mt-4 text-center px-1">
         <p class="text-[10px] sm:text-xs font-semibold text-rose-500 uppercase tracking-wider">${item.date || ''}</p>

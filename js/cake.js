@@ -10,7 +10,7 @@
 
   if (!cakeContainer) return;
 
-  const cakeConfig = window.BIRTHDAY_CONFIG?.cake || {};
+  const cakeConfig = (window.BIRTHDAY_CONFIG && window.BIRTHDAY_CONFIG.cake) ? window.BIRTHDAY_CONFIG.cake : {};
   let candlesBlown = false;
 
   // Render Candles
