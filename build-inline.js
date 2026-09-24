@@ -3,7 +3,6 @@ const path = require('path');
 
 const css = fs.readFileSync('css/styles.css', 'utf8');
 const configJs = fs.readFileSync('config.js', 'utf8');
-const confettiMin = fs.readFileSync('js/confetti.browser.min.js', 'utf8');
 const confettiJs = fs.readFileSync('js/confetti.js', 'utf8');
 const musicJs = fs.readFileSync('js/music.js', 'utf8');
 const cakeJs = fs.readFileSync('js/cake.js', 'utf8');
@@ -39,8 +38,8 @@ ${css}
 </head>
 <body class="relative">
 
-  <!-- Background Floating Sparkles & Hearts Canvas -->
-  <canvas id="bg-canvas"></canvas>
+  <!-- Background Floating Sparkles & Hearts (Pure CSS, 0% Canvas) -->
+  <div id="bg-particles"></div>
 
   <!-- Ambient Blurred Glow Orbs (Fluid & scaled for mobile) -->
   <div class="bokeh-orb bg-rose-300 w-64 h-64 sm:w-96 sm:h-96 -top-10 -left-10 sm:-top-20 sm:-left-20"></div>
@@ -274,9 +273,6 @@ ${css}
   </div>
 
   <!-- 100% Inlined Scripts: Zero External Script Roundtrips (Instant Execution) -->
-  <script>
-${confettiMin}
-  </script>
   <script>
 ${configJs}
   </script>

@@ -434,16 +434,49 @@ body {
    INTERACTIVE COMPONENTS
    ========================================================================== */
 
-/* --- Floating Background Canvas & Bokeh --- */
-#bg-canvas {
+/* --- Floating Background Particles (Pure CSS, Zero Canvas, Zero White Screen) --- */
+#bg-particles {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: 100vh;
   height: 100dvh;
   pointer-events: none;
   z-index: 1;
+  overflow: hidden;
+}
+
+.floating-bg-item {
+  position: absolute;
+  bottom: -40px;
+  user-select: none;
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  85% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-115vh) rotate(360deg) scale(1.15);
+    opacity: 0;
+  }
+}
+
+.dom-confetti-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform, opacity;
 }
 
 .bokeh-orb {
